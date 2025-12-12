@@ -1,0 +1,33 @@
+name: Build foo_scrobble
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build & install dependencies
+        shell: pwsh
+        run: |
+          Set-ExecutionPolicy Bypass -Scope Process -Force
+          ./eng/Build-Dependencies.ps1 -Install
+
+      - name: Build with MSBuild
+        shell: pwsh
+        run: |
+          msbuild -m build.proj /p:Configuration=Release
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: foo_scrobble
+          path: build/publish/*
