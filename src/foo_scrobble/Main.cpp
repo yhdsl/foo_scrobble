@@ -121,9 +121,9 @@ public:
 
     void get_about_message(pfc::string_base& out) override
     {
-        out = "foo_scrobble - 一个为 <http://www.last.fm/> 便捷提交音乐播放记录的插件\n"
+        out = "foo_scrobble - 一个向 <http://www.last.fm/> 自动提交音乐播放记录的插件\n"
               "\n"
-              "原项目仓库: <https://github.com/gix/foo_scrobble>\n";
+              "原项目仓库: <https://github.com/gix/foo_scrobble>\n"
               "汉化版本仓库: <https://github.com/yhdsl/foo_scrobble>\n";
 
         if (auto const ver = GetFileInfoValue(L"ProductVersion"); !ver.empty()) {

@@ -36,7 +36,7 @@ public:
     {
         switch (p_index) {
         case ToggleScrobblingCommand:
-            p_out = "提交音乐播放记录";
+            p_out = "自动提交音乐播放记录";
             break;
         default:
             uBugCheck();
