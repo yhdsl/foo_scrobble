@@ -64,7 +64,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessorDefinitions>_ATL_NO_HOSTING;_NO_ASYNCRTIMP;_NO_PPLXIMP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -82,7 +82,7 @@ copy "$(TargetPath)" "$(ProjectDir)..\..\test\foobar2000_v1.5\components\"</Comm
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessorDefinitions>_ATL_NO_HOSTING;_NO_ASYNCRTIMP;_NO_PPLXIMP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -98,7 +98,7 @@ copy "$(TargetPath)" "$(ProjectDir)..\..\test\foobar2000_v1.5\components\"</Comm
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessorDefinitions>_ATL_NO_HOSTING;_NO_ASYNCRTIMP;_NO_PPLXIMP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -111,7 +111,7 @@ copy "$(TargetPath)" "$(ProjectDir)..\..\test\foobar2000_v1.5\components\"</Comm
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessorDefinitions>_ATL_NO_HOSTING;_NO_ASYNCRTIMP;_NO_PPLXIMP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <PrecompiledHeader>Use</PrecompiledHeader>
