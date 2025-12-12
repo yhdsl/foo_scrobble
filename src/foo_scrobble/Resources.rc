@@ -56,11 +56,11 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x0
 BEGIN
     GROUPBOX        "提交设置",IDC_SCROBBLING_GROUP,0,24,330,66
     CONTROL         "AuthButton",IDB_AUTH,"Button",BS_SPLITBUTTON | WS_TABSTOP,0,0,108,14
-    CONTROL         "启用提交音乐播放记录",IDC_ENABLE_SCROBBLING,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,36,71,10
+    CONTROL         "启用提交音乐播放记录",IDC_ENABLE_SCROBBLING,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,36,113,10
     CONTROL         "发送正在播放通知状态",IDC_ENABLE_NOW_PLAYING,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,48,113,10
     CONTROL         "仅提交位于媒体库内的音乐文件的播放记录",IDC_SUBMIT_ONLY_IN_LIBRARY,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,60,125,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,60,201,10
     CONTROL         "提交来自动态来源的音乐文件的播放记录 (例如在线流媒体)",IDC_SUBMIT_DYNAMIC_SOURCES,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,72,201,10
     GROUPBOX        "字段映射设置",IDC_MAPPING_GROUP,0,96,330,102
