@@ -1,4 +1,4 @@
-Made with the following libraries:
+基于以下库开发:
 
 cpprestsdk: https://github.com/microsoft/cpprestsdk
 fmt:        https://fmt.dev/

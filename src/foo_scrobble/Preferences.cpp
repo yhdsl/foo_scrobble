@@ -122,19 +122,19 @@ BOOL ScrobblerPreferencesDialog::OnInitDialog(CWindow /*wndFocus*/, LPARAM /*lIn
                            GetDlgItem(IDB_AUTH), 0, nullptr, nullptr);
         authTooltip_.AddTool(&toolInfo);
 
-        authTooltip_.SetTitle(nullptr, L"last.fm Authorization");
+        authTooltip_.SetTitle(nullptr, L"获取 last.fm 身份验证令牌");
         authTooltip_.UpdateTipText(
-            L"Scrobbling requires authorization from last.fm."
+            L"提交音乐播放记录前需要获取 last.fm 的身份验证令牌。"
             L"\n\n"
-            L"\"Request authorization\": Starts the authorization process. You "
-            L"will be redirected to the last.fm website to grant access.\n"
+            L"\"授予访问权限\": 点击以开始获取身份验证令牌的流程。"
+            L"您将被自动重定向到 last.fm 以授予 foo_scrobble 访问权限。\n"
             L"\n"
-            L"\"Complete authorization\": After granting access, click to "
-            L"complete the authorization.\n"
+            L"\"完成访问授权\": 在授予 foo_scrobble 访问权限之后，"
+            L"继续点击以完成获取身份验证令牌的流程。\n"
             L"\n"
-            L"\"Clear authorization\": foobar2000 is successfully authorized. "
-            L"Click to forget the authorization credentials. This does not "
-            L"revoke permissions on last.fm directly.",
+            L"\"清除验证令牌\": 在 foo_scrobble 成功获得身份验证令牌之后，"
+            L"继续点击以清除获取的身份验证令牌。"
+            L"注意此操作不会直接撤销您在 last.fm 上授予的访问权限。",
             GetDlgItem(IDB_AUTH));
         authTooltip_.SetMaxTipWidth(250);
         authTooltip_.SetDelayTime(TTDT_INITIAL, 0);
@@ -194,7 +194,7 @@ LONG ScrobblerPreferencesDialog::OnAuthButtonDropDown(LPNMHDR pnmh) const
 
     CMenu menu;
     if (menu.CreatePopupMenu()) {
-        menu.AppendMenuW(MF_BYPOSITION, IDC_CANCEL_AUTH, L"&Cancel");
+        menu.AppendMenuW(MF_BYPOSITION, IDC_CANCEL_AUTH, L"取消");
         menu.TrackPopupMenu(TPM_LEFTALIGN | TPM_TOPALIGN, pt.x, pt.y, m_hWnd, nullptr);
     }
 
@@ -268,23 +268,23 @@ void ScrobblerPreferencesDialog::UpdateAuthButton(Authorizer::State state)
     switch (state) {
     case Authorizer::State::Unauthorized:
         button.ModifyStyle(BS_SPLITBUTTON, 0);
-        button.SetWindowTextW(L"Request authorization");
+        button.SetWindowTextW(L"授予访问权限");
         break;
     case Authorizer::State::RequestingAuth:
         button.ModifyStyle(0, BS_SPLITBUTTON);
-        button.SetWindowTextW(L"Requesting authorization…");
+        button.SetWindowTextW(L"授予访问权限中…");
         break;
     case Authorizer::State::WaitingForApproval:
         button.ModifyStyle(0, BS_SPLITBUTTON);
-        button.SetWindowTextW(L"Complete authorization");
+        button.SetWindowTextW(L"完成访问授权");
         break;
     case Authorizer::State::CompletingAuth:
         button.ModifyStyle(0, BS_SPLITBUTTON);
-        button.SetWindowTextW(L"Completing authorization…");
+        button.SetWindowTextW(L"完成访问授权中…");
         break;
     case Authorizer::State::Authorized:
         button.ModifyStyle(BS_SPLITBUTTON, 0);
-        button.SetWindowTextW(L"Clear authorization");
+        button.SetWindowTextW(L"清除验证令牌");
         break;
     }
 }
@@ -294,7 +294,7 @@ class ScrobblerPreferencesPage : public preferences_page_impl<ScrobblerPreferenc
 public:
     virtual ~ScrobblerPreferencesPage() = default;
 
-    char const* get_name() override { return "Last.fm Scrobbling"; }
+    char const* get_name() override { return "Last.fm"; }
 
     GUID get_guid() override
     {

@@ -36,7 +36,7 @@ public:
     {
         switch (p_index) {
         case ToggleScrobblingCommand:
-            p_out = "Scrobble tracks";
+            p_out = "提交音乐播放记录";
             break;
         default:
             uBugCheck();
@@ -47,7 +47,7 @@ public:
     {
         switch (p_index) {
         case ToggleScrobblingCommand:
-            p_out = "Enables or disables scrobbling tracks to last.fm";
+            p_out = "启用或禁用向 last.fm 提交音乐播放记录";
             return true;
         default:
             uBugCheck();

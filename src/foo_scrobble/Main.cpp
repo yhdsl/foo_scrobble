@@ -121,12 +121,13 @@ public:
 
     void get_about_message(pfc::string_base& out) override
     {
-        out = "foo_scrobble - Scrobbling for <http://www.last.fm/>\n"
+        out = "foo_scrobble - 一个为 <http://www.last.fm/> 便捷提交音乐播放记录的插件\n"
               "\n"
-              "Current version at: <https://github.com/gix/foo_scrobble>\n";
+              "原项目仓库: <https://github.com/gix/foo_scrobble>\n";
+              "汉化版本仓库: <https://github.com/yhdsl/foo_scrobble>\n";
 
         if (auto const ver = GetFileInfoValue(L"ProductVersion"); !ver.empty()) {
-            out += "Version: ";
+            out += "当前版本: ";
             out.add_string(ver.data(), ver.size());
             out += "\n";
         }

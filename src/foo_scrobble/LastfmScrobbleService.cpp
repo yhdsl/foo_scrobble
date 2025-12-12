@@ -118,13 +118,13 @@ void LastfmScrobbleService::ScrobbleAsync(Track track)
         break;
 
     case State::UnauthenticatedIdle:
-        FB2K_console_formatter() << "foo_scrobble: Queuing scrobble (Unauthenticated)";
+        FB2K_console_formatter() << "foo_scrobble: 正在加入待提交队列 (未认证)";
         return;
     case State::Suspended:
-        FB2K_console_formatter() << "foo_scrobble: Queuing scrobble (Invalid API key)";
+        FB2K_console_formatter() << "foo_scrobble: 正在加入待提交队列 (无效的 API 密钥)";
         return;
     case State::Sleeping:
-        FB2K_console_formatter() << "foo_scrobble: Queuing scrobble (Sleeping)";
+        FB2K_console_formatter() << "foo_scrobble: 正在加入待提交队列 (等待中)";
         return;
     case State::AwaitingResponse:
     case State::ShuttingDown:
@@ -275,7 +275,7 @@ void LastfmScrobbleService::ProcessLocked()
     if (scrobbleCache_.Count() == 1) {
         pendingSubmissionSize_ = 1;
 
-        FB2K_console_formatter() << "foo_scrobble: Submitting track";
+        FB2K_console_formatter() << "foo_scrobble: 正在提交音乐播放记录";
 
         state_ = State::AwaitingResponse;
         auto const task = webService_.Scrobble(scrobbleCache_[0], cts_.get_token());
@@ -291,8 +291,8 @@ void LastfmScrobbleService::ProcessLocked()
         for (size_t i = 0; i < batchSize; ++i)
             request.AddTrack(scrobbleCache_[i]);
 
-        FB2K_console_formatter() << "foo_scrobble: Submitting " << batchSize << " of "
-                                 << scrobbleCache_.Count() << " cached tracks";
+        FB2K_console_formatter() << "foo_scrobble: 正在提交 " << batchSize << " / "
+                                 << scrobbleCache_.Count() << " 缓存的音乐播放记录";
 
         state_ = State::AwaitingResponse;
         auto const task = webService_.Scrobble(std::move(request), cts_.get_token());
@@ -347,7 +347,7 @@ void LastfmScrobbleService::OnScrobbleResponse(outcome<void> result)
     {
         ExclusiveLock lock(mutex_);
 
-        LogResponse("Scrobbling"sv, result);
+        LogResponse("提交音乐播放记录"sv, result);
 
         auto const status = AsStatus(result);
 
@@ -387,7 +387,7 @@ void LastfmScrobbleService::OnNowPlayingResponse(outcome<void> result)
     {
         ExclusiveLock lock(mutex_);
 
-        LogResponse("NowPlaying notification"sv, result);
+        LogResponse("提交正在播放通知"sv, result);
 
         auto const status = AsStatus(result);
 
@@ -471,13 +471,13 @@ void LastfmScrobbleService::LogResponse(std::string_view task,
 
     if (result.has_exception()) {
         FB2K_console_formatter()
-            << "foo_scrobble: " << task << " failed (" << result << ")";
+            << "foo_scrobble: " << task << "时失败 (" << result << ")";
         return;
     }
 
     if (result.error().category() != lastfm::webservice_category()) {
         FB2K_console_formatter()
-            << "foo_scrobble: " << task << " failed (" << result << ")";
+            << "foo_scrobble: " << task << " 时失败 (" << result << ")";
         return;
     }
 
@@ -496,46 +496,46 @@ void LastfmScrobbleService::LogResponse(std::string_view task,
     case lastfm::Status::OperationFailed:
     case lastfm::Status::TokenNotAuthorized:
         FB2K_console_formatter()
-            << "foo_scrobble: " << task << " failed (" << status << ")";
+            << "foo_scrobble: " << task << "时失败 (" << status << ")";
         break;
 
     case lastfm::Status::AuthenticationFailed:
     case lastfm::Status::InvalidSessionKey:
         FB2K_console_formatter()
-            << "foo_scrobble: " << task << " failed (" << status << ")";
+            << "foo_scrobble: " << task << "时失败 (" << status << ")";
         break;
 
     case lastfm::Status::InvalidAPIKey:
     case lastfm::Status::SuspendedAPIKey:
         FB2K_console_formatter()
-            << "foo_scrobble: " << task << " failed (" << status << ")";
+            << "foo_scrobble: " << task << "时失败 (" << status << ")";
         break;
 
     case lastfm::Status::ServiceOffline:
     case lastfm::Status::ServiceTemporarilyUnavailable:
     case lastfm::Status::ConnectionError:
         FB2K_console_formatter()
-            << "foo_scrobble: " << task << " failed (" << status << ")";
+            << "foo_scrobble: " << task << "时失败 (" << status << ")";
         break;
 
     case lastfm::Status::RateLimitExceeded:
         FB2K_console_formatter()
-            << "foo_scrobble: " << task << " failed (" << status << ")";
+            << "foo_scrobble: " << task << "时失败 (" << status << ")";
         break;
 
     case lastfm::Status::InvalidResponse:
         FB2K_console_formatter()
-            << "foo_scrobble: " << task << " (Invalid service response)";
+            << "foo_scrobble: " << task << " (无效的服务器响应)";
         break;
 
     case lastfm::Status::InternalError:
         FB2K_console_formatter()
-            << "foo_scrobble: " << task << " (Internal foo_scrobble error)";
+            << "foo_scrobble: " << task << " (foo_scrobble 内部错误)";
         break;
 
     case lastfm::Status::EncodingError:
         FB2K_console_formatter()
-            << "foo_scrobble: " << task << " (Internal encoding error)";
+            << "foo_scrobble: " << task << " (内部编码错误)";
         break;
     }
 }

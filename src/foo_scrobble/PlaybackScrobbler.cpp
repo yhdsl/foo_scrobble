@@ -119,14 +119,14 @@ public:
         if (IsSkipped()) {
             if (logFailure)
                 FB2K_console_formatter()
-                    << "foo_scrobble: Skipping track based on skip conditions";
+                    << "foo_scrobble: 根据跳过条件跳过提交音乐播放记录";
             return false;
         }
 
         if (!HasRequiredFields()) {
             if (logFailure)
                 FB2K_console_formatter()
-                    << "foo_scrobble: Skipping track due to missing artist or title";
+                    << "foo_scrobble: 因缺少艺术家或标题元数据而提交音乐播放记录";
             return false;
         }
 
@@ -299,7 +299,7 @@ void PlaybackScrobbler::on_playback_new_track(metadb_handle_ptr p_track)
         pendingTrack_.Format(*p_track, GetFormatContext());
     } else {
         isScrobbling_ = false;
-        FB2K_console_formatter() << "foo_scrobble: Skipping track not in media library.";
+        FB2K_console_formatter() << "foo_scrobble: 跳过不在媒体库中的文件";
     }
 }
 

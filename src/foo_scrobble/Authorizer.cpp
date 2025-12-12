@@ -55,20 +55,20 @@ pplx::task<bool> Authorizer::RequestAuthAsync()
         co_return false;
 
     state_ = State::RequestingAuth;
-    console::info("foo_scrobble: Requesting auth token");
+    console::info("foo_scrobble: 正在请求身份验证令牌");
 
     WebService service(lastfm::ApiKey, lastfm::Secret);
     outcome<std::string> result = co_await service.GetAuthToken(cts_.get_token());
 
     if (!result) {
         FB2K_console_formatter()
-            << "foo_scrobble: Failed to get auth token (" << result << ")";
+            << "foo_scrobble: 请求身份验证令牌时失败 (" << result << ")";
         state_ = FromSessionKey(sessionKey_);
         co_return false;
     }
 
     std::string& authToken = result.value();
-    FB2K_console_formatter() << "foo_scrobble: Received auth token: "
+    FB2K_console_formatter() << "foo_scrobble: 已成功获取身份验证令牌: "
                              << authToken.c_str();
     OpenAuthConfirmationInBrowser(authToken);
 
@@ -83,7 +83,7 @@ pplx::task<bool> Authorizer::CompleteAuthAsync()
         co_return false;
 
     state_ = State::CompletingAuth;
-    console::info("foo_scrobble: Requesting session key");
+    console::info("foo_scrobble: 正在请求会话密钥");
 
     WebService service(lastfm::ApiKey, lastfm::Secret);
     outcome<std::string> result = co_await service.GetSessionKey(authToken_.c_str(),
@@ -91,13 +91,13 @@ pplx::task<bool> Authorizer::CompleteAuthAsync()
 
     if (!result) {
         FB2K_console_formatter()
-            << "foo_scrobble: Failed to get session key (" << result << ")";
+            << "foo_scrobble: 请求会话密钥时失败 (" << result << ")";
         state_ = FromSessionKey(sessionKey_);
         co_return false;
     }
 
     std::string& sessionKey = result.value();
-    FB2K_console_formatter() << "foo_scrobble: New session key: " << sessionKey.c_str();
+    FB2K_console_formatter() << "foo_scrobble: 新的会话密钥: " << sessionKey.c_str();
 
     sessionKey_ = sessionKey.c_str();
     authToken_.clear();
