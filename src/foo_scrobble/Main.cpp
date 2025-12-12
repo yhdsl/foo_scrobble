@@ -3,6 +3,12 @@
 #include <optional>
 #include <span>
 
+#include <Windows.h>
+#include <winver.h>
+#include <memory>
+#include <vector>
+#include <cstring>
+
 #pragma comment(lib, "Version.lib")
 
 namespace foo_scrobble

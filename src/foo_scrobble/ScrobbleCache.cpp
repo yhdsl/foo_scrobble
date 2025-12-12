@@ -12,7 +12,7 @@ stream_reader_formatter<IsBE>& operator>>(stream_reader_formatter<IsBE>& stream,
 {
     Rep rep;
     stream >> rep;
-    value = {rep};
+    value = std::chrono::duration<Rep>(rep);
     return stream;
 }
 
