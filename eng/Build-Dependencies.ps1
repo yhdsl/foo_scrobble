@@ -50,13 +50,13 @@ $triplets = ('x86-windows-static-md-noiso', 'x64-windows-static-md-noiso')
 [string]$NugetPackageId = 'foo_scrobble-deps'
 [string]$NugetPackageVersion = $Version
 
-[string]$VcpkgBranch = 'foo_scrobble'
+[string]$VcpkgBranch = 'master'
 
 if (! $VcpkgRepository) {
-    $VcpkgRepository = 'https://github.com/gix/vcpkg.git'
+    $VcpkgRepository = 'https://github.com/microsoft/vcpkg.git'
 }
 if (! $VcpkgRevision) {
-    $VcpkgRevision = 'b4c94da052e881f8cb5044d8e5b88f5ff1f0519f'
+    $VcpkgRevision = '45422e0bd15223d9a3390e917e6385f2e84459c9'
 }
 
 # ------------------------------------------------------------------------------
